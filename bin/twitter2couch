@@ -1,4 +1,4 @@
-#!/app/bin/node
+#! /app/bin/node
 
 var path = require('path');
 var nconf = require('nconf');

@@ -1,0 +1,17 @@
+{
+  "name": "tweet-couch",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+    "commander": "1.1.x",
+    "nano": "3.3.x",
+    "nconf": "0.6.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}

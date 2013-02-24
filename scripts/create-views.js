@@ -69,9 +69,11 @@ tweets.get(designDoc, function(err, body){
 							in_reply_to_screen_name = retweeted_status.in_reply_to_screen_name;
 						}
 					}
+					index('retweeted', !!retweeted_status);
 					index('default', text);
 					index('from', screen_name);
 					if (in_reply_to_screen_name) index('to', in_reply_to_screen_name);
+					index('created_at', +new Date(doc.created_at));
 
 					if (doc.entities){
 						if (doc.entities.hashtags && doc.entities.hashtags.length){

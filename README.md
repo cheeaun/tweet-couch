@@ -60,3 +60,19 @@ License
 -------
 
 Licensed under the [MIT License](http://cheeaun.mit-license.org/).
+
+Similar projects
+----------------
+
+- Tweet Nest (PHP + MySQL) <https://github.com/graulund/tweetnest> - with many forks that support Twitter Archive
+- Archive My Tweets (PHP + MySQL) <https://github.com/amwhalen/archive-my-tweets>
+- Tweetarchive (Go + PostgreSQL) <https://github.com/paulsmith/tweetarchive>
+- ElasticTweets (ElasticSearch) <https://github.com/AdaTheDev/ElasticTweets>
+- GrailbirdUpdater (Ruby) <https://github.com/DeMarko/grailbird_updater>
+- Twimo (Node.js + MongoDB) <https://github.com/rowanmanning/twimo>
+- Twarch (PHP + SQLite) <https://github.com/TomNomNom/twarch>
+- Twive (PHP + MySQL) <https://github.com/robhogg/twive>
+- TwitterToWord (Java) <https://github.com/odessa2/TwitterToWord>
+- Parse Twitter Archive (Python) <https://github.com/mshea/Parse-Twitter-Archive>
+- Couch-tweet-archiver (Node.js + CouchDB) <https://github.com/mlc/couch-tweet-archiver>
+- TweetDen (Ruby + MongoDB) <https://github.com/philoye/tweetden>

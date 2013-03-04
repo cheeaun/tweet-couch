@@ -76,3 +76,4 @@ Similar projects
 - Parse Twitter Archive (Python) <https://github.com/mshea/Parse-Twitter-Archive>
 - Couch-tweet-archiver (Node.js + CouchDB) <https://github.com/mlc/couch-tweet-archiver>
 - TweetDen (Ruby + MongoDB) <https://github.com/philoye/tweetden>
+- [Keep your Twitter Archive fresh on Google Drive using a bit of Google Apps Script](http://mashe.hawksey.info/2013/01/sync-twitter-archive-with-google-drive/)

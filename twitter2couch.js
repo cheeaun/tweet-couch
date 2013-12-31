@@ -4,7 +4,7 @@ var path = require('path');
 var nconf = require('nconf');
 nconf.argv()
 	.env()
-	.file(path.join(__dirname, '../', 'config.json'))
+	.file(path.join(__dirname, 'config.json'))
 	.defaults({
 		user_id: '',
 		supertweet_auth: 'user:pass',

@@ -15,10 +15,8 @@ tweets.get(designDoc, function(err, body){
 		views: {
 			monthly_total: {
 				map: function(doc){
-					var date = new Date(doc.created_at);
-					var month = date.getMonth()+1;
-					if (month<10) month = '0' + month;
-					emit(date.getFullYear() + '-' + month, 1);
+					var datemonth = (doc.created_at.match(/^(\d{4}\-\d{2})\-/) || [,null])[1];
+					if (datemonth) emit(datemonth, 1);
 				},
 				reduce: function(keys, values, rereduce){
 					return sum(values);
@@ -26,14 +24,14 @@ tweets.get(designDoc, function(err, body){
 			},
 			by_created_date: {
 				map: function(doc){
-					var date = new Date(doc.created_at);
+					var date = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
 					emit([
-						date.getFullYear(),
-						date.getMonth()+1,
-						date.getDate(),
-						date.getHours(),
-						date.getMinutes(),
-						date.getSeconds()
+						parseInt(date[1], 10),
+						parseInt(date[2], 10),
+						parseInt(date[3], 10),
+						parseInt(date[4], 10),
+						parseInt(date[5], 10),
+						parseInt(date[6], 10),
 					], null);
 				}
 			},
@@ -41,14 +39,14 @@ tweets.get(designDoc, function(err, body){
 				map: function(doc){
 					var media = doc.entities.media;
 					if (media.length){
-						var date = new Date(doc.created_at);
+						var date = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
 						emit([
-							date.getFullYear(),
-							date.getMonth()+1,
-							date.getDate(),
-							date.getHours(),
-							date.getMinutes(),
-							date.getSeconds()
+							parseInt(date[1], 10),
+							parseInt(date[2], 10),
+							parseInt(date[3], 10),
+							parseInt(date[4], 10),
+							parseInt(date[5], 10),
+							parseInt(date[6], 10),
 						], null);
 					}
 				}
@@ -73,7 +71,15 @@ tweets.get(designDoc, function(err, body){
 					index('default', text);
 					index('from', screen_name);
 					if (in_reply_to_screen_name) index('to', in_reply_to_screen_name);
-					index('created_at', +new Date(doc.created_at));
+
+					var date = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
+					var year = parseInt(date[1], 10);
+					var month = parseInt(date[2], 10) - 1;
+					var day = parseInt(date[3], 10);
+					var hour = parseInt(date[4], 10);
+					var min = parseInt(date[5], 10);
+					var sec = parseInt(date[6], 10);
+					index('created_at', +new Date(year, month, day, hour, min, sec));
 
 					if (doc.entities){
 						if (doc.entities.hashtags && doc.entities.hashtags.length){

@@ -42,54 +42,62 @@ tweets.get(designDoc, function(err, body){
 			},
 			by_created_date: {
 				map: function(doc){
+					var date;
 					if (/^\d/.test(doc.created_at)){
-						var date = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
-						emit([
-							parseInt(date[1], 10),
-							parseInt(date[2], 10),
-							parseInt(date[3], 10),
-							parseInt(date[4], 10),
-							parseInt(date[5], 10),
-							parseInt(date[6], 10),
-						], null);
+						var datetime = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
+						date = new Date(
+							parseInt(datetime[1], 10),
+							parseInt(datetime[2], 10)-1,
+							parseInt(datetime[3], 10),
+							parseInt(datetime[4], 10),
+							parseInt(datetime[5], 10),
+							parseInt(datetime[6], 10)
+						);
 					} else {
-						var date = new Date(doc.created_at);
-						emit([
-							date.getFullYear(),
-							date.getMonth()+1,
-							date.getDate(),
-							date.getHours(),
-							date.getMinutes(),
-							date.getSeconds()
-						], null);
+						date = new Date(doc.created_at);
 					}
+					var offset = doc.user.utc_offset || 28800; // +0800
+					var timezoneDiff = date.getTimezoneOffset()*60 + offset;
+					var offsetDate = new Date(date.getTime() + timezoneDiff * 1000);
+					emit([
+						offsetDate.getFullYear(),
+						offsetDate.getMonth()+1,
+						offsetDate.getDate(),
+						offsetDate.getHours(),
+						offsetDate.getMinutes(),
+						offsetDate.getSeconds()
+					], null);
 				}
 			},
 			media: {
 				map: function(doc){
 					var media = doc.entities.media;
 					if (media.length){
+						var date;
 						if (/^\d/.test(doc.created_at)){
-							var date = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
-							emit([
-								parseInt(date[1], 10),
-								parseInt(date[2], 10),
-								parseInt(date[3], 10),
-								parseInt(date[4], 10),
-								parseInt(date[5], 10),
-								parseInt(date[6], 10),
-							], null);
+							var datetime = doc.created_at.match(/^(\d{4})\-(\d{2})\-(\d{2})\s(\d+):(\d+):(\d+)/);
+							date = new Date(
+								parseInt(datetime[1], 10),
+								parseInt(datetime[2], 10)-1,
+								parseInt(datetime[3], 10),
+								parseInt(datetime[4], 10),
+								parseInt(datetime[5], 10),
+								parseInt(datetime[6], 10)
+							);
 						} else {
-							var date = new Date(doc.created_at);
-							emit([
-								date.getFullYear(),
-								date.getMonth()+1,
-								date.getDate(),
-								date.getHours(),
-								date.getMinutes(),
-								date.getSeconds()
-							], null);
+							date = new Date(doc.created_at);
 						}
+						var offset = doc.user.utc_offset || 28800; // +0800
+						var timezoneDiff = date.getTimezoneOffset()*60 + offset;
+						var offsetDate = new Date(date.getTime() + timezoneDiff * 1000);
+						emit([
+							offsetDate.getFullYear(),
+							offsetDate.getMonth()+1,
+							offsetDate.getDate(),
+							offsetDate.getHours(),
+							offsetDate.getMinutes(),
+							offsetDate.getSeconds()
+						], null);
 					}
 				}
 			}

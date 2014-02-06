@@ -28,11 +28,17 @@ Setup - Import to CouchDB
 Setup - Heroku Scheduler to sync tweets to CouchDB
 --------------------------------------------------
 
- 1. Fill up the config required. This app uses [nconf](https://github.com/flatiron/nconf), thus there can be multiple configuration sources e.g. `process.argv`, `process.env` and `config.json`. For Heroku, it's recommended to use environment variables. To get your Twitter user ID, use [idfromuser.com](http://www.idfromuser.com/). See notes below to know what `supertweet_auth` does.
+ 1. Fill up the config required. This app uses [nconf](https://github.com/flatiron/nconf), thus there can be multiple configuration sources e.g. `process.argv`, `process.env` and `config.json`. For Heroku, it's recommended to use environment variables.
 
 		heroku config:set user_id=<1234>
-		heroku config:set supertweet_auth=user:pass
 		heroku config:set couchdb_url=http://user:pass@localhost:5984
+		heroku config:set consumer_key=XXX
+		heroku config:set consumer_secret=XXX
+		heroku config:set access_token=XXX
+		heroku config:set access_token_secret=XXX
+
+	- To get your Twitter user ID, use [idfromuser.com](http://www.idfromuser.com/).
+	- [Set up a new app](https://dev.twitter.com/apps/new) to get your consumer key and secret. Create the access token and secret from the app's details page.
 
  2. Deploy this app to Heroku.
  4. Check if things are working by doing this:
@@ -52,9 +58,8 @@ Important Notes
 ---------------
 
  1. I assume the archived tweets are from a **Public** account. The steps above might differ slightly for private account users. Pull requests are welcomed.
- 2. The app uses [SuperTweet](http://www.supertweet.net/) service for fetching tweets because Twitter API 1.1 enforces OAuth which is a little troublesome compared to SuperTweet's Basic Authentication. Just sign up there and use the provided credentials for `supertweet_auth`.
- 3. In Cloudant, you can set up a different username and password to be used for `couchdb_url`. Go to `Permissions` page and click `Generate API key`. The API key is also the username.
- 4. The JSON responses from Twitter API are more detailed than the ones provided by Twitter Archive. Everything should still work nevertheless.
+ 2. In Cloudant, you can set up a different username and password to be used for `couchdb_url`. Go to `Permissions` page and click `Generate API key`. The API key is also the username.
+ 3. The JSON responses from Twitter API are more detailed than the ones provided by Twitter Archive. Everything should still work nevertheless.
 
 License
 -------

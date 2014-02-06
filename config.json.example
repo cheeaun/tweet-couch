@@ -1,5 +1,9 @@
 {
 	"user_id": "",
 	"supertweet_auth": "user:pass",
-	"couchdb_url": "http://localhost:5984"
+	"couchdb_url": "http://localhost:5984",
+	"consumer_key": "",
+	"consumer_secret": "",
+	"access_token": "",
+	"access_token_secret": ""
 }

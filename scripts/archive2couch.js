@@ -15,7 +15,7 @@ if (!program.folder){
 var fs = require('fs');
 var path = require('path');
 var folder = path.normalize(program.folder);
-var nano = require('nano')(program.couchdb);
+var nano = require('nano')(program.couchdb || 'http://localhost:5984');
 
 fs.readdir(folder, function(err, files){
 	if (err) throw err;

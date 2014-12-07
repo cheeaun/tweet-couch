@@ -85,6 +85,7 @@ Licensed under the [MIT License](http://cheeaun.mit-license.org/).
 Similar projects
 ----------------
 
+- Simplebird (Node.js) <https://github.com/josephschmitt/simplebird>
 - Tweet Nest (PHP + MySQL) <https://github.com/graulund/tweetnest> - with many forks that support Twitter Archive
 - Archive My Tweets (PHP + MySQL) <https://github.com/amwhalen/archive-my-tweets>
 - Tweetarchive (Go + PostgreSQL) <https://github.com/paulsmith/tweetarchive>

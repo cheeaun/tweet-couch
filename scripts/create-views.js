@@ -6,7 +6,7 @@ program
 	.option('-c, --couchdb <url>', 'url to the CouchDB server, defaults to localhost:5984')
 	.parse(process.argv);
 
-var nano = require('nano')(program.couchdb);
+var nano = require('nano')(program.couchdb || 'http://localhost:5984');
 var tweets = nano.use('tweets');
 
 var designDoc = '_design/tweets';
@@ -98,6 +98,13 @@ tweets.get(designDoc, function(err, body){
 							offsetDate.getMinutes(),
 							offsetDate.getSeconds()
 						], null);
+					}
+				}
+			},
+			undated_tweets: {
+				map: function(doc){
+					if (/00:00:00 \+0000/.test(doc.created_at)){
+						emit(null, doc.created_at);
 					}
 				}
 			}

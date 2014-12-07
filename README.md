@@ -61,6 +61,22 @@ Important Notes
  2. In Cloudant, you can set up a different username and password to be used for `couchdb_url`. Go to `Permissions` page and click `Generate API key`. The API key is also the username.
  3. The JSON responses from Twitter API are more detailed than the ones provided by Twitter Archive. Everything should still work nevertheless.
 
+Additional Notes
+----------------
+
+Some tweets from the Twitter Archive have the wrong `created_at` timestamps. This is probably a known bug that's [already reported in the developers forum](https://twittercommunity.com/t/creation-time-of-tweet-is-no-longer-include-in-the-user-downlodable-twitter-archive/11960).
+
+To fix those tweets, run:
+
+    node scripts/fix-tweets.js -c <http://user:pass@localhost:5984>
+
+This script will go through all tweets that contains `00:00:00 +0000` timestamps and query the Twitter API to get the *real* timestamps to replace them.
+
+There could be some tweets that can't be fixed, due to reasons:
+
+- Those tweets are no longer available. Usually retweeted tweets from a deleted account.
+- The timestamp of that tweet is *actually* legit.
+
 License
 -------
 

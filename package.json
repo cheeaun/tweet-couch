@@ -1,14 +1,11 @@
 {
   "name": "tweet-couch",
-  "version": "0.0.2",
-  "engines": {
-    "node": "0.10.x"
-  },
+  "version": "1.0.0",
   "dependencies": {
-    "commander": "~2.5.0",
-    "moment": "~2.8.4",
-    "nano": "~6.0.1",
-    "nconf": "~0.6.9",
-    "twit": "~1.1.18"
+    "commander": "~2.14.1",
+    "moment": "~2.21.0",
+    "nano": "~6.4.3",
+    "nconf": "~0.10.0",
+    "twit": "~2.2.9"
   }
 }
